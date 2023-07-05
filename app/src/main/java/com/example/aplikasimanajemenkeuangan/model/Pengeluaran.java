@@ -8,7 +8,7 @@ public class Pengeluaran {
     private String tanggal_pengeluaran;
     private int jumlah_pengeluaran;
 
-    public Pengeluaran(int id_pengeluaran, String kategori_pemasukan, String tanggal_pengeluaran, int jumlah_pengeluaran) {
+    public Pengeluaran(int id_pengeluaran, String kategori_pengeluaran, String tanggal_pengeluaran, int jumlah_pengeluaran) {
         setId_pengeluaran(id_pengeluaran);
         setKategori_pengeluaran(kategori_pengeluaran);
         setTanggal_pengeluaran(tanggal_pengeluaran);

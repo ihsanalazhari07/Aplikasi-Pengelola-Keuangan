@@ -10,6 +10,9 @@ import com.example.aplikasimanajemenkeuangan.model.Anggaran;
 import com.example.aplikasimanajemenkeuangan.model.Pemasukan;
 import com.example.aplikasimanajemenkeuangan.model.Pengeluaran;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SQLiteAdapter extends SQLiteOpenHelper {
     public static final String ANGGARAN_TABLE = "tb_anggaran";
     public static final String PEMASUKAN_TABLE = "tb_pemasukan";
@@ -179,6 +182,88 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 
         return lastAddedAnggaran;
     }
+
+    public List<Pemasukan> getAllPemasukan() {
+        List<Pemasukan> pemasukanList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(PEMASUKAN_TABLE, null, null, null, null, null, null);
+
+        int idIndex = cursor.getColumnIndex(ID_PEMASUKAN);
+        int jumlahIndex = cursor.getColumnIndex(JUMLAH_PEMASUKAN);
+
+        while (cursor.moveToNext()) {
+            int id = (idIndex != -1) ? cursor.getInt(idIndex) : 0;
+            int jumlahPemasukan = (jumlahIndex != -1) ? cursor.getInt(jumlahIndex) : 0;
+
+            String tanggalPemasukan;
+            try {
+                tanggalPemasukan = cursor.getString(cursor.getColumnIndexOrThrow(TANGGAL_PEMASUKAN));
+            } catch (IllegalArgumentException e) {
+                tanggalPemasukan = "";
+            }
+
+            String kategoriPemasukan;
+            try {
+                kategoriPemasukan = cursor.getString(cursor.getColumnIndexOrThrow(KATEGORI_PEMASUKAN));
+            } catch (IllegalArgumentException e) {
+                kategoriPemasukan = "";
+            }
+
+            Pemasukan pemasukan = new Pemasukan(id, kategoriPemasukan, tanggalPemasukan, jumlahPemasukan);
+            pemasukanList.add(pemasukan);
+        }
+
+        cursor.close();
+        return pemasukanList;
+    }
+
+    public List<Pengeluaran> getAllPengeluaran() {
+        List<Pengeluaran> pengeluaranList = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(PENGELUARAN_TABLE, null, null, null, null, null, null);
+
+        int idIndex = cursor.getColumnIndex(ID_PENGELUARAN);
+        int jumlahIndex = cursor.getColumnIndex(JUMLAH_PENGELUARAN);
+
+        while (cursor.moveToNext()) {
+            int id = (idIndex != -1) ? cursor.getInt(idIndex) : 0;
+            int jumlahPengeluaran = (jumlahIndex != -1) ? cursor.getInt(jumlahIndex) : 0;
+
+            String tanggalPengeluaran;
+            try {
+                tanggalPengeluaran = cursor.getString(cursor.getColumnIndexOrThrow(TANGGAL_PENGELUARAN));
+            } catch (IllegalArgumentException e) {
+                tanggalPengeluaran = "";
+            }
+
+            String kategoriPengeluaran;
+            try {
+                kategoriPengeluaran = cursor.getString(cursor.getColumnIndexOrThrow(KATEGORI_PENGELUARAN));
+            } catch (IllegalArgumentException e) {
+                kategoriPengeluaran = "";
+            }
+
+            Pengeluaran pengeluaran = new Pengeluaran(id, kategoriPengeluaran, tanggalPengeluaran, jumlahPengeluaran);
+            pengeluaranList.add(pengeluaran);
+        }
+
+
+
+
+        cursor.close();
+        return pengeluaranList;
+    }
+
+
+
+
+
+
+
+
+
 
 
 
