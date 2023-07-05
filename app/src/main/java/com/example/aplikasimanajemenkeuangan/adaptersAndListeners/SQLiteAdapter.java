@@ -69,7 +69,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
     public boolean addAnggaran(Anggaran theAnggaran){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(ID_ANGGARAN,theAnggaran.getId_anggaran());
+        cv.put(ID_ANGGARAN, theAnggaran.getId_anggaran());
         cv.put(JUMLAH_ANGGARAN,theAnggaran.getJumlah_anggaran());
         cv.put(TANGGAL_MULAI,theAnggaran.getTanggal_mulai());
         cv.put(TANGGAL_SELESAI,theAnggaran.getTanggal_selesai());
@@ -94,7 +94,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
     public boolean addPemasukan(Pemasukan thePemasukan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(ID_PEMASUKAN, thePemasukan.getId_pemasukan());
         cv.put(KATEGORI_PEMASUKAN, thePemasukan.getKategori_pemasukan());
         cv.put(TANGGAL_PEMASUKAN, thePemasukan.getTanggal_pemasukan());
         cv.put(JUMLAH_PEMASUKAN, thePemasukan.getJumlah_pemasukan());
@@ -106,41 +105,81 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
     public boolean addPengeluaran(Pengeluaran thePengeluaran) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(ID_PENGELUARAN, thePengeluaran.getId_pengeluaran());
         cv.put(KATEGORI_PENGELUARAN, thePengeluaran.getKategori_pengeluaran());
         cv.put(TANGGAL_PENGELUARAN, thePengeluaran.getTanggal_pengeluaran());
         cv.put(JUMLAH_PENGELUARAN, thePengeluaran.getJumlah_pengeluaran());
 
-        long insert = db.insert(PEMASUKAN_TABLE, null, cv);
+        long insert = db.insert(PENGELUARAN_TABLE, null, cv);
         return insert != -1;
     }
-    public Pemasukan getLastAddedPemasukan() {
+    public int getLastAddedPemasukanJumlah() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String query = "SELECT * FROM " + PEMASUKAN_TABLE + " ORDER BY " + ID_PEMASUKAN + " DESC LIMIT 1";
+        String query = "SELECT SUM(" + JUMLAH_PEMASUKAN + ") FROM " + PEMASUKAN_TABLE;
 
         Cursor cursor = db.rawQuery(query, null);
 
-        Pemasukan pemasukan = null;
+        int totalJumlahPemasukan = 0;
         if (cursor.moveToFirst()) {
-            int idPemasukanIndex = cursor.getColumnIndex(ID_PEMASUKAN);
-            int kategoriPemasukanIndex = cursor.getColumnIndex(KATEGORI_PEMASUKAN);
-            int tanggalPemasukanIndex = cursor.getColumnIndex(TANGGAL_PEMASUKAN);
-            int jumlahPemasukanIndex = cursor.getColumnIndex(JUMLAH_PEMASUKAN);
-
-            if (idPemasukanIndex != -1 && kategoriPemasukanIndex != -1 && tanggalPemasukanIndex != -1 && jumlahPemasukanIndex != -1) {
-                int idPemasukan = cursor.getInt(idPemasukanIndex);
-                String kategoriPemasukan = cursor.getString(kategoriPemasukanIndex);
-                String tanggalPemasukan = cursor.getString(tanggalPemasukanIndex);
-                int jumlahPemasukan = cursor.getInt(jumlahPemasukanIndex);
-
-                pemasukan = new Pemasukan(idPemasukan, kategoriPemasukan, tanggalPemasukan, jumlahPemasukan);
-            }
+            totalJumlahPemasukan = cursor.getInt(0);
         }
 
         cursor.close();
-        return pemasukan;
+        return totalJumlahPemasukan;
     }
+
+
+    public int getLastAddedPengeluaranJumlah() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT SUM(" + JUMLAH_PENGELUARAN + ") FROM " + PENGELUARAN_TABLE;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        int totalJumlahPengeluaran = 0;
+        if (cursor.moveToFirst()) {
+            totalJumlahPengeluaran = cursor.getInt(0);
+        }
+
+        cursor.close();
+        return totalJumlahPengeluaran;
+    }
+
+
+
+
+    public int getLatestAnggaranJumlah() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + JUMLAH_ANGGARAN + " FROM " + ANGGARAN_TABLE +
+                " ORDER BY " + ID_ANGGARAN + " DESC LIMIT 1";
+        Cursor cursor = db.rawQuery(query, null);
+
+        int jumlahAnggaran = 0;
+        if (cursor.moveToFirst()) {
+            int jumlahAnggaranIndex = cursor.getColumnIndexOrThrow(JUMLAH_ANGGARAN);
+            jumlahAnggaran = cursor.getInt(jumlahAnggaranIndex);
+        }
+
+        cursor.close();
+        return jumlahAnggaran;
+    }
+
+    public int getLastAddedAnggaran() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        int lastAddedAnggaran = 0;
+
+        String query = "SELECT " + JUMLAH_ANGGARAN + " FROM " + ANGGARAN_TABLE +
+                " ORDER BY " + ID_ANGGARAN + " DESC LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            lastAddedAnggaran = cursor.getInt(0);
+            cursor.close();
+        }
+
+        return lastAddedAnggaran;
+    }
+
 
 
 

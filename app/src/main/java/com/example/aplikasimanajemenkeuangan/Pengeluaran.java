@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.aplikasimanajemenkeuangan.adaptersAndListeners.SQLiteAdapter;
 
 import java.util.Calendar;
 
@@ -55,6 +58,35 @@ public class Pengeluaran extends AppCompatActivity {
             public void onClick(View v) {
                 Intent pindah_ke_detailPengeluaran = new Intent(Pengeluaran.this,Detail_Pengeluaran.class);
                 startActivity(pindah_ke_detailPengeluaran);
+            }
+        });
+
+        Button simpanPengeluaran = findViewById(R.id.simpanPengeluaran);
+        simpanPengeluaran.setOnClickListener(new View.OnClickListener() {
+            int incrementedIdPengeluaran = 1;
+
+            @Override
+            public void onClick(View v) {
+                String kategoriPengeluaran = ((EditText) findViewById(R.id.kategoriPengeluaran)).getText().toString();
+                String tanggalPengeluaranText = ((EditText) findViewById(R.id.tanggalPengeluaran)).getText().toString();
+                int jumlahPengeluaran = Integer.parseInt(((EditText) findViewById(R.id.jumlahPengeluaran)).getText().toString());
+
+                incrementedIdPengeluaran++;
+                com.example.aplikasimanajemenkeuangan.model.Pengeluaran pengeluaran = new com.example.aplikasimanajemenkeuangan.model.Pengeluaran(incrementedIdPengeluaran, kategoriPengeluaran, tanggalPengeluaranText, jumlahPengeluaran);
+
+                SQLiteAdapter sqliteAdapter = new SQLiteAdapter(Pengeluaran.this);
+                boolean success = sqliteAdapter.addPengeluaran(pengeluaran);
+
+                if (success) {
+                    int lastAddedPengeluaran = sqliteAdapter.getLastAddedPengeluaranJumlah();
+                    Toast.makeText(Pengeluaran.this, "Pengeluaran added successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Pengeluaran.this, MainActivity.class);
+                    intent.putExtra("lastAddedPengeluaran", lastAddedPengeluaran);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(Pengeluaran.this, "Failed to add Pengeluaran", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

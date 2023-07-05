@@ -19,6 +19,9 @@ public class Anggaran extends AppCompatActivity {
 
     private int tahun, bulan, tanggal;
 
+    public Anggaran() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,22 +84,18 @@ public class Anggaran extends AppCompatActivity {
         simpanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the input values
                 int jumlahAnggaran = Integer.parseInt(((EditText) findViewById(R.id.jumlahAnggaran)).getText().toString());
                 String tanggalMulaiText = tanggalMulai.getText().toString();
                 String tanggalSelesaiText = tanggalSelesai.getText().toString();
 
-                // Create an Anggaran object
-                com.example.aplikasimanajemenkeuangan.model.Anggaran anggaran = new com.example.aplikasimanajemenkeuangan.model.Anggaran(9, jumlahAnggaran, tanggalMulaiText, tanggalSelesaiText);
+                com.example.aplikasimanajemenkeuangan.model.Anggaran anggaran = new com.example.aplikasimanajemenkeuangan.model.Anggaran(2, jumlahAnggaran, tanggalMulaiText, tanggalSelesaiText);
 
-
-                // Add the Anggaran to the database
                 SQLiteAdapter sqliteAdapter = new SQLiteAdapter(Anggaran.this);
                 boolean success = sqliteAdapter.addAnggaran(anggaran);
 
                 if (success) {
-                    Toast.makeText(Anggaran.this, "Anggaran added successfully", Toast.LENGTH_SHORT).show();
-                    int addedAnggaran = anggaran.getJumlah_anggaran(); // Retrieve the added jumlah_anggaran
+                    int addedAnggaran = sqliteAdapter.getLatestAnggaranJumlah();
+
                     Intent intent = new Intent(Anggaran.this, MainActivity.class);
                     intent.putExtra("addedAnggaran", addedAnggaran);
                     startActivity(intent);
@@ -106,6 +105,7 @@ public class Anggaran extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }

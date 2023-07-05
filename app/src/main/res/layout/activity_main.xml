@@ -90,10 +90,10 @@
         android:backgroundTint="@color/putih"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
-        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042"
+        app:layout_constraintVertical_bias="0.039"
         tools:ignore="HardcodedText,MissingConstraints,SpeakableTextPresentCheck" />
 
     <TextView
@@ -158,10 +158,11 @@
 
     <TextView
         android:id="@+id/textViewPengeluaran"
-        android:layout_width="107dp"
-        android:layout_height="25dp"
-        android:background="@color/putih"
-        android:textColor="@color/black"
+        android:layout_width="129dp"
+        android:layout_height="30dp"
+        android:background="@drawable/input_shape"
+        android:gravity="center"
+        android:hint="- Rp."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"
@@ -171,11 +172,11 @@
 
     <TextView
         android:id="@+id/textViewPemasukan"
-        android:layout_width="107dp"
-        android:layout_height="25dp"
-        android:background="@color/putih"
-        android:text=""
-        android:textColor="@color/putih"
+        android:layout_width="129dp"
+        android:layout_height="30dp"
+        android:background="@drawable/input_shape"
+        android:gravity="center"
+        android:hint="+ Rp."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"

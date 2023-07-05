@@ -35,6 +35,11 @@ public class Anggaran implements Parcelable {
         }
     };
 
+    public Anggaran(int lastAddedAnggaran, int totalAnggaran) {
+    }
+
+
+
     public int getId_anggaran() {
         return id_anggaran;
     }
