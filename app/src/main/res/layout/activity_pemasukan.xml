@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hijau"
+    tools:context=".Pemasukan">
+
+    <LinearLayout
+        android:layout_width="425dp"
+        android:layout_height="512dp"
+        android:background="@drawable/shape2"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986"
+        tools:ignore="MissingConstraints,VisualLintBounds">
+
+
+        <EditText
+            android:id="@+id/jumlahPemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Jumlah Pemasukan"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/tanggalPemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Masukan Tanggal"
+            android:inputType="date"/>
+
+        <EditText
+            android:id="@+id/kategoriPemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Masukan Kategori"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/simpanPemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Simpan" />
+
+        <Button
+            android:id="@+id/detailPemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Detail Pemasukan" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_pemasukan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/pemasukan2"
+        android:textColor="@color/putih"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <View
+        android:id="@+id/view_pemasukan"
+        android:layout_width="99dp"
+        android:layout_height="75dp"
+        android:background="@drawable/pemasukan_icon"
+        android:backgroundTint="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049" />
+</android.support.constraint.ConstraintLayout>

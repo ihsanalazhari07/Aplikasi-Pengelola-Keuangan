@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hijau"
+    tools:context=".Anggaran">
+
+    <LinearLayout
+        android:layout_width="425dp"
+        android:layout_height="512dp"
+        android:background="@drawable/shape2"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.986"
+        tools:ignore="MissingConstraints,VisualLintBounds">
+
+
+        <EditText
+            android:id="@+id/jumlahAnggaran"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Jumlah Anggaran"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/tanggalMulai"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Tanggal Mulai"
+            android:inputType="date"/>
+
+        <EditText
+            android:id="@+id/tanggalSelesai"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:autofillHints=""
+            android:hint="Tanggal Selesai"
+            android:inputType="date"/>
+
+        <Button
+            android:id="@+id/simpanPengeluaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Simpan" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_anggaran"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/anggaran"
+        android:textColor="@color/putih"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.098"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <View
+        android:id="@+id/view_anggaran"
+        android:layout_width="97dp"
+        android:layout_height="81dp"
+        android:background="@drawable/baseline_attach_money_24"
+        android:backgroundTint="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.156"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076" />
+</android.support.constraint.ConstraintLayout>

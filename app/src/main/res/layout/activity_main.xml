@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/hijau"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="390dp"
+        android:layout_height="386dp"
+        android:background="@drawable/shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699"
+        tools:ignore="MissingConstraints,VisualLintBounds">
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="84dp"
+            android:layout_height="73dp"
+            android:background="@drawable/pengeluaran_icon"
+            android:backgroundTint="@color/hijau"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.287" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="80dp"
+            android:layout_height="61dp"
+            android:background="@drawable/pemasukan_icon"
+            android:backgroundTint="@color/hijau"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.148"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.667" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="210dp"
+            android:layout_height="51dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/hijau"
+            android:fontFamily="@font/poppins"
+            android:text="@string/button1"
+            android:textColor="@color/putih"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.766"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.298"
+            tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="214dp"
+            android:layout_height="50dp"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/hijau"
+            android:fontFamily="@font/poppins"
+            android:text="@string/button2"
+            android:textColor="@color/putih"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.784"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.678"
+            tools:ignore="TextContrastCheck,DuplicateSpeakableTextCheck" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/baseline_add_circle_outline_24"
+        android:backgroundTint="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        tools:ignore="HardcodedText,MissingConstraints,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="127dp"
+        android:layout_height="42dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/anggaran"
+        android:textColor="@color/putih"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.049"
+        tools:ignore="TextSizeCheck,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/pengeluaran"
+        android:textColor="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/pemasukan"
+        android:textColor="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159"
+        tools:ignore="MissingConstraints,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/textViewAnggaran"
+        android:layout_width="129dp"
+        android:layout_height="30dp"
+        android:background="@drawable/input_shape"
+        android:gravity="center"
+        android:hint="Rp."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.868"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
+
+    <TextView
+        android:id="@+id/textViewPengeluaran"
+        android:layout_width="107dp"
+        android:layout_height="25dp"
+        android:background="@color/putih"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.102" />
+
+    <TextView
+        android:id="@+id/textViewPemasukan"
+        android:layout_width="107dp"
+        android:layout_height="25dp"
+        android:background="@color/putih"
+        android:text=""
+        android:textColor="@color/putih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.224" />
+
+</android.support.constraint.ConstraintLayout>

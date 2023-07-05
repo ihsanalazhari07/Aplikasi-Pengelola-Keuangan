@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Manajemen Keuangan</string>
+    <string name="anggaran">Anggaran</string>
+    <string name="button1">Pengeluaran</string>
+    <string name="button2">Pemasukan</string>
+    <string name="button3">Tabungan</string>
+    <string name="pengeluaran">Pengeluaran:</string>
+    <string name="pemasukan">Pemasukan:</string>
+    <string name="pemasukan2">Pemasukan</string>
+    <string name="pengeluaran2">Pengeluaran</string>
+    <string name="tabungan">Tabungan</string>
+    <string name="simpan">Simpan</string>
+</resources>
