@@ -1,11 +1,16 @@
 package com.example.aplikasimanajemenkeuangan;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.aplikasimanajemenkeuangan.adaptersAndListeners.SQLiteAdapter;
 
 import java.util.Calendar;
 
@@ -68,6 +73,37 @@ public class Anggaran extends AppCompatActivity {
                     }
                 },tahun, bulan, tanggal);
                 dialog.show();
+            }
+        });
+
+        // Simpan Button
+        Button simpanButton = findViewById(R.id.simpanPengeluaran);
+        simpanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the input values
+                int jumlahAnggaran = Integer.parseInt(((EditText) findViewById(R.id.jumlahAnggaran)).getText().toString());
+                String tanggalMulaiText = tanggalMulai.getText().toString();
+                String tanggalSelesaiText = tanggalSelesai.getText().toString();
+
+                // Create an Anggaran object
+                com.example.aplikasimanajemenkeuangan.model.Anggaran anggaran = new com.example.aplikasimanajemenkeuangan.model.Anggaran(9, jumlahAnggaran, tanggalMulaiText, tanggalSelesaiText);
+
+
+                // Add the Anggaran to the database
+                SQLiteAdapter sqliteAdapter = new SQLiteAdapter(Anggaran.this);
+                boolean success = sqliteAdapter.addAnggaran(anggaran);
+
+                if (success) {
+                    Toast.makeText(Anggaran.this, "Anggaran added successfully", Toast.LENGTH_SHORT).show();
+                    int addedAnggaran = anggaran.getJumlah_anggaran(); // Retrieve the added jumlah_anggaran
+                    Intent intent = new Intent(Anggaran.this, MainActivity.class);
+                    intent.putExtra("addedAnggaran", addedAnggaran);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(Anggaran.this, "Failed to add Anggaran", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

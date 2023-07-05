@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.aplikasimanajemenkeuangan.adaptersAndListeners.SQLiteAdapter;
 
 import java.util.Calendar;
 
@@ -55,5 +58,37 @@ public class Pemasukan extends AppCompatActivity {
                 startActivity(pindah_ke_detailPemasukan);
             }
         });
+
+        Button simpanPemasukan = findViewById(R.id.simpanPemasukan);
+        simpanPemasukan.setOnClickListener(new View.OnClickListener() {
+            int incrementedIdPemasukan = 1;
+            @Override
+            public void onClick(View v) {
+                // Get the input values from the user interface
+                String kategoriPemasukan = ((EditText) findViewById(R.id.kategoriPemasukan)).getText().toString();
+                String tanggalPemasukanText = ((EditText) findViewById(R.id.tanggalPemasukan)).getText().toString();
+                int jumlahPemasukan = Integer.parseInt(((EditText) findViewById(R.id.jumlahPemasukan)).getText().toString());
+
+                // Create a new Pemasukan object
+                incrementedIdPemasukan++;
+                com.example.aplikasimanajemenkeuangan.model.Pemasukan pemasukan = new com.example.aplikasimanajemenkeuangan.model.Pemasukan(incrementedIdPemasukan, kategoriPemasukan, tanggalPemasukanText, jumlahPemasukan);
+
+                // Add the Pemasukan to the database
+                SQLiteAdapter sqliteAdapter = new SQLiteAdapter(Pemasukan.this);
+                boolean success = sqliteAdapter.addPemasukan(pemasukan);
+                com.example.aplikasimanajemenkeuangan.model.Pemasukan lastAddedPemasukan = sqliteAdapter.getLastAddedPemasukan();
+
+                if (success) {
+                    Toast.makeText(Pemasukan.this, "Pemasukan added successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Pemasukan.this, MainActivity.class);
+                    intent.putExtra("lastAddedPemasukan", lastAddedPemasukan != null ? lastAddedPemasukan.getJumlah_pemasukan() : 0);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(Pemasukan.this, "Failed to add Pemasukan", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }

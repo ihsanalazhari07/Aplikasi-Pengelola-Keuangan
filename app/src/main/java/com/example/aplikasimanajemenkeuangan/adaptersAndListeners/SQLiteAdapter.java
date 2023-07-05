@@ -2,6 +2,7 @@ package com.example.aplikasimanajemenkeuangan.adaptersAndListeners;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -22,17 +23,16 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
     public static final String ID_PEMASUKAN = "id_pemasukan";
     public static final String KATEGORI_PEMASUKAN = "kategori_pemasukan";
     public static final String TANGGAL_PEMASUKAN = "tanggal_pemasukan";
-    public static final String KETERANGAN_PEMASUKAN = "keterangan_pemasukan";
     public static final String JUMLAH_PEMASUKAN = "jumlah_pemasukan";
 
     public static final String ID_PENGELUARAN = "id_pengeluaran";
     public static final String KATEGORI_PENGELUARAN = "kategori_pengeluaran";
     public static final String TANGGAL_PENGELUARAN = "tanggal_pengeluaran";
-    public static final String KETERANGAN_PENGELUARAN = "keterangan_pengeluaran";
+
     public static final String JUMLAH_PENGELUARAN = "jumlah_pengeluaran";
 
     public SQLiteAdapter(Context context) {
-        super(context, "db_manajemen_keuangan.db", null, 1);
+        super(context, "db_manajemen_keuangan.db", null, 2);
     }
 
 
@@ -48,14 +48,12 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
                 ID_PEMASUKAN+" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KATEGORI_PEMASUKAN+" VARCHAR(20) DEFAULT NULL," +
                 TANGGAL_PEMASUKAN+" DATETIME DEFAULT NULL," +
-                KETERANGAN_PEMASUKAN+" VARCHAR(50) DEFAULT NULL," +
                 JUMLAH_PEMASUKAN+" INTEGER(11) DEFAULT NULL" +
                 ");";
         String createPengeluaranTable = "CREATE TABLE " + PENGELUARAN_TABLE + "(" +
                 ID_PENGELUARAN+" INTEGER PRIMARY KEY AUTOINCREMENT," +
                 KATEGORI_PENGELUARAN+" VARCHAR(20) DEFAULT NULL," +
                 TANGGAL_PENGELUARAN+" DATETIME DEFAULT NULL," +
-                KETERANGAN_PENGELUARAN+" VARCHAR(50) DEFAULT NULL," +
                 JUMLAH_PENGELUARAN+" INTEGER(11) DEFAULT NULL" +
                 ");";
         db.execSQL(createAnggaranTable);
@@ -99,7 +97,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
         cv.put(ID_PEMASUKAN, thePemasukan.getId_pemasukan());
         cv.put(KATEGORI_PEMASUKAN, thePemasukan.getKategori_pemasukan());
         cv.put(TANGGAL_PEMASUKAN, thePemasukan.getTanggal_pemasukan());
-        cv.put(KETERANGAN_PEMASUKAN, thePemasukan.getKeterangan_pemasukan());
         cv.put(JUMLAH_PEMASUKAN, thePemasukan.getJumlah_pemasukan());
 
         long insert = db.insert(PEMASUKAN_TABLE, null, cv);
@@ -112,12 +109,40 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
         cv.put(ID_PENGELUARAN, thePengeluaran.getId_pengeluaran());
         cv.put(KATEGORI_PENGELUARAN, thePengeluaran.getKategori_pengeluaran());
         cv.put(TANGGAL_PENGELUARAN, thePengeluaran.getTanggal_pengeluaran());
-        cv.put(KETERANGAN_PENGELUARAN, thePengeluaran.getKeterangan_pengeluaran());
         cv.put(JUMLAH_PENGELUARAN, thePengeluaran.getJumlah_pengeluaran());
 
         long insert = db.insert(PEMASUKAN_TABLE, null, cv);
         return insert != -1;
     }
+    public Pemasukan getLastAddedPemasukan() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + PEMASUKAN_TABLE + " ORDER BY " + ID_PEMASUKAN + " DESC LIMIT 1";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        Pemasukan pemasukan = null;
+        if (cursor.moveToFirst()) {
+            int idPemasukanIndex = cursor.getColumnIndex(ID_PEMASUKAN);
+            int kategoriPemasukanIndex = cursor.getColumnIndex(KATEGORI_PEMASUKAN);
+            int tanggalPemasukanIndex = cursor.getColumnIndex(TANGGAL_PEMASUKAN);
+            int jumlahPemasukanIndex = cursor.getColumnIndex(JUMLAH_PEMASUKAN);
+
+            if (idPemasukanIndex != -1 && kategoriPemasukanIndex != -1 && tanggalPemasukanIndex != -1 && jumlahPemasukanIndex != -1) {
+                int idPemasukan = cursor.getInt(idPemasukanIndex);
+                String kategoriPemasukan = cursor.getString(kategoriPemasukanIndex);
+                String tanggalPemasukan = cursor.getString(tanggalPemasukanIndex);
+                int jumlahPemasukan = cursor.getInt(jumlahPemasukanIndex);
+
+                pemasukan = new Pemasukan(idPemasukan, kategoriPemasukan, tanggalPemasukan, jumlahPemasukan);
+            }
+        }
+
+        cursor.close();
+        return pemasukan;
+    }
+
+
 
 
 }
